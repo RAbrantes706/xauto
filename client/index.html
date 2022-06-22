@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <title>_NAME_</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Maps stuff -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
+  </head>
+  <body>
+    <header>
+      <h1>
+        <img src="logo.png">
+        _NAME_
+      </h1>
+    </header>
+    <nav>
+      <a class="selected" id="navHome" href="javascript:selectFrame('Home')">
+        Home</a>
+      <a id="navDashboard" style="display: none" 
+        href="javascript:selectFrame('Dashboard')">Dashboard</a>
+      <a id="navVehicles" style="display: none" 
+        href="javascript:selectFrame('Vehicles')">Vehicles</a>
+      <a id="navHistory" style="display: none" 
+        href="javascript:selectFrame('History')">History</a>
+      <div class="nav-right">
+        <a id="navLogIn" href="javascript:openLogInModal()">Log In</a>
+        <a id="navSignUp" href="javascript:openSignUpModal()">Sign Up</a>
+        <a id="navUser" style="display: none"
+          href="javascript:selectFrame('User')"></a>
+        <a id="navLogOut" style="display: none" 
+          href="javascript:logOutProcedure()">Log Out</a>
+      </div>
+    </nav>
+
+    <div id="frameHome" class="frame">
+      This is the home frame! Welcome!!
+    </div>
+
+    <div id="frameDashboard" class="frame" style="display: none">
+      <div style="display: flex; flex-direction: row nowarp">
+        <div id="mapid" style="height: 600px; width: 30%"></div>
+        <div id="dashboard" class="dashboard"></div>
+      </div>
+    </div>
+
+    <div id="frameVehicles" class="frame" style="display: none">
+      <div style="display: flex; justify-content: start">
+        <div class="vehicles">
+          <h2>Vehicles</h2>
+          <div id="vehicles"></div>
+          <button onclick="openCreateVehicleModal()">Create New</button>
+        </div>
+
+        <div id="vehicleOptions" class="vehicleOptions" style="display: none">
+          <h2>Options</h2>
+          <form name="editVehicleForm" onsubmit="editVehicleProcedure(); 
+            return false;">
+            <input type="text" name="vName">
+            <br>
+            <input data-jscolor="{}" onInput="changePreviewColor(this)"
+              name="vColor" style="width:154px">
+            <br>
+            <label id=vehicleIdLabel></label>
+            <button type="submit">Edit</button>
+          </form>
+          <button onclick="deleteVehicleProcedure()">Delete</button>
+          <button onclick="addSensor()">Add Sensor</button>
+        </div>
+
+        <div id="vehicleSensors" class="vehicleSensors" style="display: none">
+          <h2>Sensors</h2>
+          <div class="sensorList" id="sensorList"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="frameHistory" class="frame" style="display: none">
+      <div style="display: flex; justify-content: start">
+        <div class="vehicles">
+          <h2>Vehicles</h2>
+          <div id="historyVehicles"></div>
+        </div>
+        <div id="history">
+          <h2 id="historyTitle"></h2>
+          <div class="historyControls" id="historyControls" 
+            style="display: none; justify-content: center;">
+            <button onclick="download(selectedVehicle.id)">Download</button>
+            <button onclick="clearHistory()">Delete</button>
+          </div>
+          <div class="pagination" id="paginationControls"></div>
+          <div id="historyTable"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="frameUser" class="frame" style="display: none">
+      Here are the user configuration tools.
+    </div>
+
+    <!-- Log In Modal -->
+    <div id="logInModal" class="modal">
+      <form name="logInForm" onSubmit="logInProcedure(); return false;"
+          class="modal-content animate">
+        <div class="container">
+          <span onclick="closeLogInModal()" class="close">&times;</span>
+          <h1>Log In</h1>
+          <hr>
+
+          <div class="container alert" id="logInAlert"></div>
+
+          <label for="name">Username</label>
+          <input type="text" placeholder="Enter Username" name="name">
+
+          <label for="password">Password</label>
+          <input type="password" placeholder="Enter Password" name="password">
+
+          <button type="submit" id="submitBtn">Login</button>
+          <label> <input type="checkbox" name="remember"> Remember me </label>
+        </div>
+
+        <div class="container" style="background-color: #CFD8DC">
+          <button type="button" class="cancelBtn" onclick="closeLogInModal()">
+            Cancel</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Sign Up Modal -->
+    <div id="signUpModal" class="modal">
+      <form name="signUpForm" onSubmit="signUpProcedure(); return false;"
+          class="modal-content animate">
+        <div class="container">
+          <span onclick="closeSignUpModal()" class="close">&times;</span>
+          <h1>Sign Up </h1>
+          <hr>
+
+          <div class="container alert" id="signUpAlert"></div>
+
+          <label for="name">Username</label>
+          <input type="text" placeholder="Enter Username" name="name">
+
+          <label for="mail">Email</label>
+          <input type="text" placeholder="Enter E-mail" name="mail">
+
+          <label for="password">Password</label>
+          <input type="password" placeholder="Enter Password" name="password">
+
+          <label for="confirm">Confirm password</label>
+          <input type="password" placeholder="Enter Password Again" 
+              name="confirm">
+
+          <button type="submit" id="submitBtn">Sign up</button>
+        </div>
+
+        <div class="container" style="background-color: #CFD8DC">
+          <button type="button" class="cancelBtn" onclick="closeSignUpModal()">
+            Cancel</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Create Vehicle Modal -->
+    <div id="createVehicleModal" class="modal">
+      <form name="createVehicleForm" onSubmit="createVehicleProcedure(); 
+        return false;" class="modal-content animate">
+
+        <div class="container">
+          <span onclick="closeCreateVehicleModal()" 
+            class="close">&times;</span>
+          <h1>Create Vehicle</h1>
+          <hr>
+
+          <div class="container alert" id="createVehicleAlert"></div>
+
+          <label for="vName">Vehicle Name</label>
+          <input type="text" placeholder="Eg.: Bicycle" name="vName">
+
+          <label for="vColor">Vehicle Website Color</label>
+          <br>
+          <input data-jscolor="{random:true}" name="vColor">
+
+          <button type="submit" id="submitBtn">Create</button>
+        </div>
+
+        <div class="container" style="background-color: #CFD8DC">
+          <button type="button" class="cancelBtn"
+            onclick="closeCreateVehicleModal()">Cancel</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Snackbar! -->
+    <div id="snackbar"></div>
+
+    <script src="authentication.js"></script>
+    <script src="modal.js"></script>
+    <script src="vehicle.js"></script>
+    <script src="dashboard.js"></script>
+    <script src="history.js"></script>
+    <script src="page.js"></script>
+    <script src="maps.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.4.6/jscolor.min.js"></script> 
+  </body>
+</html>

@@ -1,0 +1,428 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+header {
+  color: #FFFFFF;
+  background-color: #607D8B;
+  font-size: 25px;
+  padding: 10px;
+  padding-left: 50px;
+}
+
+header img {
+  height: 80px;
+}
+
+h2 {
+  margin: 15px;
+}
+
+nav {
+  background-color: #455A64;
+  padding: 14px 0px;
+}
+
+nav a {
+  color: #FFFFFF;
+  text-align: center;
+  padding: 14px 16px;
+  font-size: 17px;
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: #212121;
+  background-color: #CFD8DC;
+  opacity: 0.8;
+}
+
+nav a.selected {
+  color: #FFFFFF;
+  background-color: #FF5722;
+}
+
+.nav-right {
+  float: right;
+  color: #FFFFFF;
+}
+
+body {
+  color: #212121;
+  background-color: #CFD8DC;
+  font-family: sans-serif;
+}
+
+.frame {
+  padding: 16px;
+}
+
+.dashboard {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-left: 30px;
+}
+
+.sensorsDashboard {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  align-items: stretch;
+  row-gap: 10px;
+}
+
+.sensorBox{
+  margin: 0px 10px;
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+  min-width: 100px;
+}
+
+.sensorBoxName {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.vehicles button{
+  background-color: #607D8B;
+  color: #FFFFFF;
+  font-size: 17px;
+  border: 3px outset black;
+  border-radius: 10px;
+  padding: 10px 24px;
+  margin-bottom: 10px;
+  width: 200px;
+  display: block;
+}
+
+.vehicles button:active{
+  border: 3px inset black;
+}
+
+#selectedVehicle {
+  border: 3px inset black;
+  font-weight: bold;
+}
+
+.vehicleOptions{
+  width: 200px;
+  margin-left: 30px;
+}
+
+.vehicleOptions button {
+  display: block;
+  background-color: #607D8B;
+  color: white;
+  border: 2px outset black;
+  margin: 10px 0px;
+  width: 200px;
+  font-size: 17px;
+  padding: 10px;
+}
+
+.vehicleOptions button:active {
+  border: 2px inset black;
+}
+
+.vehicleOptions label {
+  display: inline-block;
+  font-size: 20px;
+  font-weight: bold;
+  width: 200px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.vehicleOptions input[type=text] {
+  font-size: 17px;
+  text-align: center;
+  padding: 10px 0px;
+  border: 2px solid black;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  margin-top: 0px;
+  width: 196px;
+}
+
+.vehicleSensors {
+  margin-left: 30px;
+}
+
+.sensorList {
+  display: flex;
+  flex-direction: column;
+}
+
+.sensorForm {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-end;
+  align-items: center;
+  border: 3px inset black;
+  padding: 5px;
+  margin: 5px 0px;
+}
+
+.sensorForm .idLabel {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 5px;
+}
+
+.sensorForm .radioDiv {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin: 5px;
+}
+
+.sensorForm input[type=text] {
+  margin: 5px;
+  font-size: 17px;
+}
+
+.sensorForm button{
+  background-color: #607D8B;
+  color: white;
+  font-size: 17px;
+  border: 2px outset black;
+  padding: 5px 10px;
+  margin: 0px 5px;
+}
+
+.sensorForm button:active {
+  border: 2px inset black;
+}
+
+#history {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 30px;
+}
+
+.historyTable {
+  border-collapse: collapse;
+  border-radius: 5px 5px 0px 0px;
+  overflow: hidden;
+  margin: 25px 0px;
+}
+
+.historyTable thead tr {
+  color: #FFFFFF;
+  background-color: #455A64;
+  text-align: left;
+}
+
+.historyTable th, .historyTable td {
+  padding: 12px 15px;
+}
+
+.historyTable tbody tr {
+  border-bottom: 1px solid #607D8B;
+}
+
+.historyTable tbody tr:nth-of-type(even) {
+  background-color: #FFFFFF;
+}
+
+.historyTable tbody tr:last-of-type {
+  border-bottom: 2px solid #455A64;
+}
+
+.historyControls button {
+  display: block;
+  background-color: #607D8B;
+  color: white;
+  border: 2px outset black;
+  margin: 10px;
+  width: 200px;
+  font-size: 17px;
+  padding: 10px;
+}
+
+.historyControls button:active {
+  border: 2px inset black;
+}
+
+.pagination {
+  display: inline-block;
+  margin-top: 15px;
+}
+
+.pagination a {
+  color: #FFFFFF;
+  background-color: #607D8B;
+  padding: 8px 16px;
+  margin-left: 8px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.pagination a:hover:not(#selectedPage) {
+  opacity: 0.8;
+}
+
+.pagination #selectedPage {
+  background-color: #FF5722;
+}
+
+/* Full-width input fields */
+.modal-content input[type=text], .modal-content input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+  color: #212121;
+  background-color: #CFD8DC;
+  padding: 14px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+#submitBtn {
+  width: 100%;
+  color: #FFFFFF;
+  background-color: #04AA6D;
+}
+
+/* Extra styles for the cancel button */
+.cancelBtn {
+  width: auto;
+  padding: 10px 18px;
+  color: #FFFFFF;
+  background-color: #F44336;
+}
+
+hr {
+  border: 1px solid #CFD8DC;
+  margin-bottom: 25px;
+}
+
+.container {
+  padding: 16px;
+}
+
+.alert {
+  display: none;
+  background-color: #F44336;
+  color: #FFFFFF;
+  text-align: center;
+  border-radius: 25px;
+  margin: 20px;
+}
+
+ /* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5px auto; /* 15% from the top and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  /* Position it in the top right corner outside of the modal */
+  float: right;
+  right: 25px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+/* Close button on hover */
+.close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
+}
+
+#snackbar {
+  visibility: hidden;
+  min-width: 250px; /* Set a default minimum width */
+  margin-left: -125px; /* Divide value of min-width by 2 */
+  background-color: #333; /* Black background color */
+  color: #fff; /* White text color */
+  text-align: center; /* Centered text */
+  border-radius: 2px; /* Rounded borders */
+  padding: 16px; /* Padding */
+  position: fixed; /* Sit on top of the screen */
+  z-index: 1; /* Add a z-index if needed */
+  left: 50%; /* Center the snackbar */
+  bottom: 30px; /* 30px from the bottom */
+}
+
+#snackbar.show {
+  visibility: visible; /* Show the snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)}
+  to {-webkit-transform: scale(1)}
+}
+
+@keyframes animatezoom {
+  from {transform: scale(0)}
+  to {transform: scale(1)}
+} 
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}

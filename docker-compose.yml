@@ -1,0 +1,33 @@
+version: "3.7"
+
+services: 
+  api:
+    build:
+      context: .
+      dockerfile: ./docker/api/Dockerfile
+    env_file:
+      - .env
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      xauto:
+        ipv4_address: 172.0.0.2
+
+  database:
+    build:
+      context: .
+      dockerfile: ./docker/database/Dockerfile
+    env_file:
+      - .env
+    networks:
+      xauto:
+        ipv4_address: 172.0.0.3
+
+networks:
+  xauto:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.0.0.0/24
